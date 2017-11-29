@@ -1,1 +1,1 @@
-This folder contains the starter files for a SaaS server.
+This folder contains the starter files for a typical SaaS server.
