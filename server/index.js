@@ -4,6 +4,7 @@ import { graphqlExpress,graphiqlExpress } from 'apollo-server-express'
 import { makeExecutableSchema } from 'graphql-tools'
 import typeDefs from './schema'
 import resolvers from './resolvers'
+import models from './models'
 
 export const schema = makeExecutableSchema({
 	typeDefs,
@@ -18,6 +19,7 @@ app.use('/graphiql', graphiqlExpress({
 	endpointURL: '/graphql',
 }))
 
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema: schema }))
+app.use('/graphql', bodyParser.json(), graphqlExpress({ schema: schema, context: {models} }))
 
-app.listen(PORT)
+models.sequelize.sync().then(() => app.listen(PORT))
+console.log(`GraphQL Server running on port ${PORT}`)
