@@ -11,17 +11,12 @@ export default (sequelize, DataTypes) => {
 		},
 		password: DataTypes.STRING,
 	})
-	/*		
+			
 	User.associate = (models) => {
-		// 1 to many with board
-		User.hasMany(models.Board, {
-			foreignKey: 'owner',
-		})
 		// 1 to many with suggestion
-		User.hasMany(models.Suggestion, {
+		User.hasMany(models.Post, {
 			foreignKey: 'creatorId',
 		})
-	}
-	/**/
+	}	
 	return User
 }

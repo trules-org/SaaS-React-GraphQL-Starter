@@ -3,8 +3,26 @@ import bycrpt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import _ from 'lodash'
 
-export default {    
-    
+export default {
+	
+	User: {		
+		posts: ({ id }, args, { models }) =>		
+			models.Post.findAll({		
+				where: {		
+				  creatorId: id,		
+			},		
+			}),		
+	},
+
+	Post: {	
+		creator: ({ creatorId }, args, { models }) =>	
+			models.User.findOne({	
+				where: {	
+				  id: creatorId,	
+				},	
+			}),	
+	},
+	
 	Query: {
 		allUsers: (parent, args, { models }) => models.User.findAll(),
 		getUser: (parent, { username }, { models, user }) => {
@@ -14,20 +32,23 @@ export default {
 					username,
 				},
 			})
-		}
+		},
+
+		getUserPosts: (parent, { creatorId }, { models }) =>		
+			  models.Post.findAll({		
+				where: {		
+				  creatorId,		
+				},		
+			  }),
 	},
     
 	Mutation: {
-		updateUser: (parent, { username, newUsername }, { models }) =>
-			models.User.update({ username: newUsername }, { where: { username } }),
-		deleteUser: (parent, args, { models }) => {  
-			models.User.destroy({ where: args })
-		},
 		register: async (parent, args, { models }) => {
 			const user = args
 			user.password = await bycrpt.hash(user.password, 12)
 			return models.User.create(user)
 		},
+		
 		login: async (parent, {email, password}, { models, SECRET }) => {
 			const user = await models.User.findOne({ where: { email }})
 			if (!user) {
@@ -47,6 +68,16 @@ export default {
 				},
 			)
 			return token
-		}
+		},
+
+		updateUser: (parent, { username, newUsername }, { models }) =>
+			models.User.update({ username: newUsername }, { where: { username } }),
+		
+		deleteUser: (parent, args, { models }) => {  
+			models.User.destroy({ where: args })
+		},
+
+		createPost: (parent, args, { models }) =>
+			  models.Post.create(args),
 	},    
 }
