@@ -24,11 +24,13 @@ const app = express()
 // Add a user to the request if the header has a verifiable jwt token
 const addUser = async (req) => {
 	const token = req.headers.authorization
-	try{
-		const { user } = await jwt.verify(token, SECRET)
-		req.user = user
-	} catch ( err ) {
-		console.log( err )
+	if(token) {
+		try{
+			const { user } = await jwt.verify(token, SECRET)
+			req.user = user
+		} catch ( err ) {
+			console.log( err )
+		}
 	}
 	req.next()
 }

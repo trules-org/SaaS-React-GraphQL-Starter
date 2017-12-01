@@ -7,10 +7,13 @@ The server API will be GraphQL based, and will include both secure HTTP and Webs
 
 The schema contains three types: User, Post and Friendship. 
 
-Users have posts and friends. 
-Users must be logged in to create and view posts.
-Each User can have many friends. Registering a friend only adds them to the User's list - Each Friendship is uni-directional. 
-Users must be logged in to register friends. Users can only register other existing Users as Friends.
-When a User registers a friend, it grants the other User permission to view their posts.
-Users can only see their own posts and posts created by other Users who have registered them as a friend.
+- Users can have posts and friends.
+- Each User can have many friends. Registering a friend only adds them to the User's list - Each Friendship is uni-directional. 
+
+- Users must be logged in to register friends. 
+- Users can only register other existing Users as Friends.
+- When a User registers a friend, it grants the other User permission to view their posts.
+
+- Users must be logged in to create and view posts.
+- Users can only see their own posts and posts created by other Users who have registered them as a friend.
 

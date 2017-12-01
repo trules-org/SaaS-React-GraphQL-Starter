@@ -23,7 +23,9 @@ export default `
         friend: User!
     }
    
-    type Query {        
+    type Query {
+        testConnection: String!
+               
         allUsers: [User!]!        
         getUser(username: String!): User
 

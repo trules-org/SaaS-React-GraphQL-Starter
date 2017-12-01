@@ -48,6 +48,8 @@ export default {
 	},
 	
 	Query: {
+		testConnection: () => 'hi',
+
 		allUsers: (parent, args, { models }) => models.User.findAll(),
 
 		getUser: (parent, { username }, { models, user }) => {
