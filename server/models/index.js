@@ -24,6 +24,7 @@ const sequelize = new Sequelize(
 const db = {
 	User: sequelize.import('./user'),
 	Post: sequelize.import('./post'),
+	Friendship: sequelize.import('./friendship'),
 }
 
 Object.keys(db).forEach((modelName) => {

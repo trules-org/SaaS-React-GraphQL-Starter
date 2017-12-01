@@ -15,7 +15,11 @@ export default {
 		},
 
 		friends: ({ id }, args, { models }) => {
-			return models.User.findAll()
+			return models.Friendship.findAll({
+				where: {
+					userId: id,
+				}
+			})
 		},
 	},
 
@@ -26,6 +30,21 @@ export default {
 				  id: creatorId,	
 				},	
 			}),	
+	},
+
+	Friendship: {	
+		user: ({ userId }, args, { models }) =>	
+			models.User.findOne({	
+				where: {	
+				  id: userId,	
+				},	
+			}),
+		friend: ({ friendId }, args, { models }) =>	
+			models.User.findOne({	
+				where: {	
+				  id: friendId,	
+				},	
+			}),					
 	},
 	
 	Query: {
@@ -85,5 +104,8 @@ export default {
 
 		createPost: (parent, args, { models }) =>
 			  models.Post.create(args),
-	},    
+
+		createFriendship: (parent, args, { models }) =>
+			models.Friendship.create(args),
+		},    
 }

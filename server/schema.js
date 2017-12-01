@@ -1,12 +1,5 @@
 //schema
 export default `
-    type Post {    
-        id: Int!    
-        text: String!    
-        creator: User!
-        createdAt: String!  
-    }
-  
     type User {
         id: Int!
         username: String!
@@ -14,9 +7,22 @@ export default `
         createdAt: String!
         updatedAt: String!
         posts: [Post!]!
-        friends: [User]!
+        friends: [Friendship]!
     }
-    
+
+    type Post {    
+        id: Int!    
+        text: String!    
+        creator: User!
+        createdAt: String!  
+    }
+  
+    type Friendship {
+        id: Int!
+        user: User!
+        friend: User!
+    }
+   
     type Query {        
         allUsers: [User!]!        
         getUser(username: String!): User
@@ -32,5 +38,7 @@ export default `
         deleteUser(id: Int!): Int!
         
         createPost(creatorId: Int!, text: String): Post!
+
+        createFriendship(userId: Int!, friendId: Int!): Friendship!
     }
 `
