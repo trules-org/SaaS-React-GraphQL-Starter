@@ -14,6 +14,7 @@ export default `
         createdAt: String!
         updatedAt: String!
         posts: [Post!]!
+        friends: [User]!
     }
     
     type Query {        

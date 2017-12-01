@@ -6,12 +6,17 @@ import _ from 'lodash'
 export default {
 	
 	User: {		
-		posts: ({ id }, args, { models }) =>		
-			models.Post.findAll({		
+		posts: ({ id }, args, { models }) => {	
+			return models.Post.findAll({		
 				where: {		
 				  creatorId: id,		
-			},		
-			}),		
+				},		
+			})
+		},
+
+		friends: ({ id }, args, { models }) => {
+			return models.User.findAll()
+		},
 	},
 
 	Post: {	
@@ -25,6 +30,7 @@ export default {
 	
 	Query: {
 		allUsers: (parent, args, { models }) => models.User.findAll(),
+
 		getUser: (parent, { username }, { models, user }) => {
 			console.log(user)
 			return models.User.findOne({
