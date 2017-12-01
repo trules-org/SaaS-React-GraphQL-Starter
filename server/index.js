@@ -14,6 +14,7 @@ export const schema = makeExecutableSchema({
 	resolvers,
 })
 
+// Secret used by jwt
 const SECRET = 'qwertyuiop'
 
 const PORT = 3003
