@@ -8,8 +8,8 @@ export default {
 	User: {		
 		posts: ({ id }, args, { models }) => {	
 			return models.Post.findAll({		
-				where: {		
-				  creatorId: id,		
+				where: {
+					creatorId: id,		
 				},		
 			})
 		},
@@ -27,7 +27,7 @@ export default {
 		creator: ({ creatorId }, args, { models }) =>	
 			models.User.findOne({	
 				where: {	
-				  id: creatorId,	
+					id: creatorId,	
 				},	
 			}),	
 	},
@@ -36,13 +36,13 @@ export default {
 		user: ({ userId }, args, { models }) =>	
 			models.User.findOne({	
 				where: {	
-				  id: userId,	
+					id: userId,	
 				},	
 			}),
 		friend: ({ friendId }, args, { models }) =>	
 			models.User.findOne({	
 				where: {	
-				  id: friendId,	
+					id: friendId,	
 				},	
 			}),					
 	},
@@ -60,11 +60,11 @@ export default {
 		},
 
 		getUserPosts: (parent, { creatorId }, { models }) =>		
-			  models.Post.findAll({		
+			models.Post.findAll({		
 				where: {		
-				  creatorId,		
+					creatorId,		
 				},		
-			  }),
+			}),
 	},
     
 	Mutation: {
@@ -103,9 +103,9 @@ export default {
 		},
 
 		createPost: (parent, args, { models }) =>
-			  models.Post.create(args),
+			models.Post.create(args),
 
 		createFriendship: (parent, args, { models }) =>
 			models.Friendship.create(args),
-		},    
+	},    
 }
